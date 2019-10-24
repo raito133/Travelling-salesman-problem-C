@@ -7,7 +7,12 @@
 
 int main()
 {
-	Menu menu();
+	Menu menu;
+	if (menu.isRunning() == false) {
+		menu.run();
+	}
+
+	return;
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania

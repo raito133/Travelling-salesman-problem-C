@@ -5,13 +5,17 @@ class Menu
 	int choice;
 	bool running;
 	void displayMain();
-	void display0();
-	void chooseMenu();
+	void bfDispl();
+	void pr1Displ();
+	void pr2Displ();
+	void pr3Displ();
+	
 public:
 	Menu();
 	~Menu();
 	
-	void setRunning();
+	bool isRunning();
+	void run();
 
 };
 

@@ -5,7 +5,7 @@
 Menu::Menu()
 {
 	choice = -1;
-	running = true;
+	running = false;
 }
 
 
@@ -13,8 +13,9 @@ Menu::~Menu()
 {
 }
 
-void Menu::setRunning()
+bool Menu::isRunning()
 {
+	return running;
 }
 
 void Menu::displayMain()
@@ -27,21 +28,36 @@ void Menu::displayMain()
 	std::cout << "4. Exit";
 }
 
-void Menu::display0()
+void Menu::bfDispl()
 {
 
 }
 
-void Menu::chooseMenu()
+
+void Menu::run()
 {
-	switch (choice) {
-	case 0:
-		display0;
-		break;
-	case 4:
-		running = false;
-		break;
-	default:
+	running = true;
+	while (running)
+	{
 		displayMain();
+		std::cin >> choice;
+		switch (choice) {
+		case 0:
+			bfDispl();
+			break;
+		case 1:
+			pr1Displ();
+			break;
+		case 2:
+			pr2Displ();
+			break;
+		case 3:
+			pr3Displ();
+			break;
+		case 4:
+			running = false;
+			break;
+		}
+
 	}
 }
