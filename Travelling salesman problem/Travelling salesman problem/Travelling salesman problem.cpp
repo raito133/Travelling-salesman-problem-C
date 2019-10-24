@@ -12,7 +12,7 @@ int main()
 		menu.run();
 	}
 
-	return;
+	return 0;
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania

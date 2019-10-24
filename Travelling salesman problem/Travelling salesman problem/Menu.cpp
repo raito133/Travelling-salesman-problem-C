@@ -25,11 +25,48 @@ void Menu::displayMain()
 	std::cout << "1. PR1. " << std::endl;
 	std::cout << "2. PR2. " << std::endl;
 	std::cout << "3. PR3. Genetic algorithm" << std::endl;
-	std::cout << "4. Exit";
+	std::cout << "4. File management" << std::endl;
+	std::cout << "5. Exit";
 }
 
 void Menu::bfDispl()
 {
+
+}
+
+void Menu::pr1Displ()
+{
+}
+
+void Menu::pr2Displ()
+{
+}
+
+void Menu::pr3Displ()
+{
+}
+
+void Menu::filDispl()
+{
+	bool run = true;
+	while (run)
+	{
+		std::cout << "\n1. Load from file" << std::endl;
+		std::cout << "2. Print loaded data" << std::endl;
+		std::cout << "3. Go back" << std::endl;
+		std::cin >> choice;
+		switch (choice) {
+		case 1:
+			//loadFile();
+			break;
+		case 2:
+			//printFile();
+			break;
+		case 3:
+			run = false;
+			break;
+		}
+	}
 
 }
 
@@ -55,6 +92,9 @@ void Menu::run()
 			pr3Displ();
 			break;
 		case 4:
+			filDispl();
+			break;
+		case 5:
 			running = false;
 			break;
 		}

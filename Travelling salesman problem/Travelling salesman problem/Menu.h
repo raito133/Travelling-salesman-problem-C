@@ -9,6 +9,7 @@ class Menu
 	void pr1Displ();
 	void pr2Displ();
 	void pr3Displ();
+	void filDispl();
 	
 public:
 	Menu();
