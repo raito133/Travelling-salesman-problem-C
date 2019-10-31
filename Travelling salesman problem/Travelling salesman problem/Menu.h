@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "ATSPMatrix.h"
 class Menu
 {
 	int choice;
@@ -10,6 +11,7 @@ class Menu
 	void pr2Displ();
 	void pr3Displ();
 	void filDispl();
+	ATSPMatrix currentMatrix;
 	
 public:
 	Menu();

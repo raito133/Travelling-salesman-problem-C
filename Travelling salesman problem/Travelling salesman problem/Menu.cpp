@@ -2,6 +2,7 @@
 #include "Menu.h"
 
 
+
 Menu::Menu()
 {
 	choice = -1;
@@ -57,10 +58,10 @@ void Menu::filDispl()
 		std::cin >> choice;
 		switch (choice) {
 		case 1:
-			//loadFile();
+			currentMatrix.loadFile("br17.atsp");
 			break;
 		case 2:
-			//printFile();
+			currentMatrix.printMatrix();
 			break;
 		case 3:
 			run = false;
