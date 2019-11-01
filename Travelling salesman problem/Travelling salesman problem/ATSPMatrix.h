@@ -12,7 +12,9 @@ class ATSPMatrix
 	
 public:
 	void printMatrix();
-	void loadFile(std::string fileName);
+	bool loadFile(std::string fileName);
+	std::string getName();
+	int getDimension();
 	ATSPMatrix();
 	~ATSPMatrix();
 };

@@ -5,6 +5,8 @@
 void ATSPMatrix::printMatrix()
 {
 	
+	if (dimension == 0)
+		std::cout << "No file is loaded\n";
 	std::cout << "Name: " << name << ", dimension: " << dimension << std::endl;
 	for (int i = 0; i < atspMatrix.size(); i++)
 	{
@@ -17,10 +19,15 @@ void ATSPMatrix::printMatrix()
 	}
 }
 
-void ATSPMatrix::loadFile(std::string fileName)
+bool ATSPMatrix::loadFile(std::string fileName)
 {
 	std::ifstream load;
 	load.open(fileName);
+	if (!load.is_open())
+	{
+		return false;
+	}
+	atspMatrix.clear();
 	std::string line;
 	int number;
 	while (line != "EDGE_WEIGHT_SECTION") {
@@ -41,8 +48,20 @@ void ATSPMatrix::loadFile(std::string fileName)
 		}
 		atspMatrix.push_back(row);
 	}
-	std::cout << "Loaded file: " << name << std::endl << "Dimension: " << dimension << std::endl;
 
+	load.close();
+	return true;
+
+}
+
+std::string ATSPMatrix::getName()
+{
+	return name;
+}
+
+int ATSPMatrix::getDimension()
+{
+	return dimension;
 }
 
 ATSPMatrix::ATSPMatrix()
