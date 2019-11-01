@@ -58,7 +58,10 @@ void Menu::filDispl()
 		std::cin >> choice;
 		switch (choice) {
 		case 1:
-			currentMatrix.loadFile("br17.atsp");
+			if(currentMatrix.loadFile("data/br17.atsp"))
+				std::cout << "Loaded file: " << currentMatrix.getName() << std::endl << "Dimension: " << currentMatrix.getDimension() << std::endl;
+			else
+				std::cout << "Failed to load the file\n";
 			break;
 		case 2:
 			currentMatrix.printMatrix();
