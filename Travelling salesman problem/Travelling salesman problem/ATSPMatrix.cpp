@@ -4,12 +4,16 @@
 
 void ATSPMatrix::printMatrix()
 {
-	
 	if (dimension == 0)
 		std::cout << "No file is loaded\n";
 	std::cout << "Name: " << name << ", dimension: " << dimension << std::endl;
+	std::cout << std::setw(2) << "X ";
+	for (int i = 0; i < atspMatrix.size(); i++)
+		std::cout << std::setw(2) <<  i << " ";
+	std::cout << std::endl;
 	for (int i = 0; i < atspMatrix.size(); i++)
 	{
+		std::cout << std::setw(2) <<  i << " ";
 		for (int j = 0; j < atspMatrix[i].size(); j++)
 		{
 			std::cout << std::setw(2);
@@ -37,7 +41,7 @@ bool ATSPMatrix::loadFile(std::string fileName)
 		if (line == "DIMENSION:")
 			load >> dimension;
 	}
-	
+
 	for (int i = 0; i < dimension; i++) {
 		std::vector<int> row;
 		for (int j = 0; j < dimension; j++) {
