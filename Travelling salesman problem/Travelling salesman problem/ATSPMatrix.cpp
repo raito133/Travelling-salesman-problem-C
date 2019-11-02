@@ -6,7 +6,7 @@ int ATSPMatrix::calculatePath(std::vector<int> nodes)
 {
 	int distance = 0;
 	distance = atspMatrix[startingNode][nodes[0]];
-	for (int i = 0; i < nodes.size(); i++)
+	for (int i = 0; i < (int)nodes.size(); i++)
 	{
 		if (i + 1 != nodes.size())
 			distance += atspMatrix[nodes[i]][nodes[i + 1]];
@@ -19,18 +19,20 @@ int ATSPMatrix::calculatePath(std::vector<int> nodes)
 void ATSPMatrix::printMatrix()
 {
 	if (dimension == 0)
-		std::cout << "No file is loaded\n";
-	std::cout << "Name: " << name << ", dimension: " << dimension << std::endl;
-	std::cout << std::setw(2) << "X ";
-	for (int i = 0; i < atspMatrix.size(); i++)
-		std::cout << std::setw(2) <<  i << " ";
-	std::cout << std::endl;
-	for (int i = 0; i < atspMatrix.size(); i++)
 	{
-		std::cout << std::setw(2) <<  i << " ";
-		for (int j = 0; j < atspMatrix[i].size(); j++)
+		std::cout << "No file is loaded\n";
+		return;
+	}
+	std::cout << "Name: " << name << ", dimension: " << dimension << std::endl;
+	for (int i = -1; i < (int)atspMatrix.size(); i++)
+		std::cout << std::setw(4) <<  i << " ";
+	std::cout << std::endl;
+	for (int i = 0; i < (int)atspMatrix.size(); i++)
+	{
+		std::cout << std::setw(4) <<  i << " ";
+		for (int j = 0; j < (int)atspMatrix[i].size(); j++)
 		{
-			std::cout << std::setw(2);
+			std::cout << std::setw(4);
 			std::cout << atspMatrix[i][j] << " ";
 		}
 		std::cout << std::endl;
@@ -82,7 +84,7 @@ void ATSPMatrix::bruteForce()
 	do
 	{
 		currentPath = 0;
-		for (int i = 0; i < nodes.size(); i++)
+		for (int i = 0; i < (int)nodes.size(); i++)
 		{
 			currentPath = calculatePath(nodes);
 			if (shortestPathLength == -1 || currentPath < shortestPathLength)
