@@ -46,6 +46,7 @@ bool ATSPMatrix::loadFile(std::string fileName)
 		return false;
 	}
 	atspMatrix.clear();
+	nodes.clear();
 	std::string line;
 	int number;
 	while (line != "EDGE_WEIGHT_SECTION") {
