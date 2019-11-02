@@ -56,9 +56,14 @@ void Menu::filDispl()
 		std::cout << "2. Print loaded data" << std::endl;
 		std::cout << "3. Go back" << std::endl;
 		std::cin >> choice;
+		std::string fileName;
 		switch (choice) {
 		case 1:
-			if(currentMatrix.loadFile("data/br17.atsp"))
+			std::cout << "Enter the name of the file stored in /data/ folder(without extension): ";
+			std::cin >> fileName;
+			fileName.insert(0, "data/");
+			fileName.append(".atsp");
+			if(currentMatrix.loadFile(fileName))
 				std::cout << "Loaded file: " << currentMatrix.getName() << std::endl << "Dimension: " << currentMatrix.getDimension() << std::endl;
 			else
 				std::cout << "Failed to load the file\n";
