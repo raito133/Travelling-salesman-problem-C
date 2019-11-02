@@ -2,6 +2,20 @@
 #include "ATSPMatrix.h"
 
 
+int ATSPMatrix::calculatePath(std::vector<int> nodes)
+{
+	int distance = 0;
+	distance = atspMatrix[startingNode][nodes[0]];
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		if (i + 1 != nodes.size())
+			distance += atspMatrix[nodes[i]][nodes[i + 1]];
+		else
+			distance += atspMatrix[nodes[i]][startingNode];
+	}
+	return distance;
+}
+
 void ATSPMatrix::printMatrix()
 {
 	if (dimension == 0)
@@ -44,6 +58,8 @@ bool ATSPMatrix::loadFile(std::string fileName)
 
 	for (int i = 0; i < dimension; i++) {
 		std::vector<int> row;
+		if (i != 0)
+			nodes.push_back(i);
 		for (int j = 0; j < dimension; j++) {
 			load >> number;
 			if (number == 9999)
@@ -56,6 +72,31 @@ bool ATSPMatrix::loadFile(std::string fileName)
 	load.close();
 	return true;
 
+}
+
+void ATSPMatrix::bruteForce()
+{
+	int shortestPathLength = -1, currentPath;
+	std::vector<int> shortestPathNodes;
+	do
+	{
+		currentPath = 0;
+		for (int i = 0; i < nodes.size(); i++)
+		{
+			currentPath = calculatePath(nodes);
+			if (shortestPathLength == -1 || currentPath < shortestPathLength)
+			{
+				shortestPathNodes = nodes;
+				shortestPathLength = currentPath;
+			}
+		}
+
+	} while (std::next_permutation(nodes.begin(), nodes.end()));
+	std::cout << "Shortest path length: " << shortestPathLength;
+	std::cout << "\nNodes: ";
+	for (const int x : shortestPathNodes)
+		std::cout << x << " ";
+	std::cout << std::endl;
 }
 
 std::string ATSPMatrix::getName()
@@ -71,6 +112,7 @@ int ATSPMatrix::getDimension()
 ATSPMatrix::ATSPMatrix()
 {
 	dimension = 0;
+	startingNode = 0;
 }
 
 
