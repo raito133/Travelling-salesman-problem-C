@@ -32,7 +32,7 @@ void Menu::displayMain()
 
 void Menu::bfDispl()
 {
-
+	currentMatrix.bruteForce();
 }
 
 void Menu::pr1Displ()
