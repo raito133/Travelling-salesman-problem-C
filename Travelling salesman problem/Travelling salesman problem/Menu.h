@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "ATSPMatrix.h"
+#include "bnbSolver.h"
 class Menu
 {
 	int choice;
@@ -12,6 +13,8 @@ class Menu
 	void pr3Displ();
 	void filDispl();
 	ATSPMatrix currentMatrix;
+	bnbSolver* bnbsolv;
+
 	
 public:
 	Menu();

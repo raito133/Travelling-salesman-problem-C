@@ -37,6 +37,10 @@ void Menu::bfDispl()
 
 void Menu::pr1Displ()
 {
+	bnbsolv = new bnbSolver(currentMatrix);
+	bnbsolv->solve();
+	delete bnbsolv;
+
 }
 
 void Menu::pr2Displ()
