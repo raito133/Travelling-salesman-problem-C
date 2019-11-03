@@ -9,9 +9,21 @@ int ATSPMatrix::calculatePath(std::vector<int> nodes)
 	for (int i = 0; i < (int)nodes.size(); i++)
 	{
 		if (i + 1 != nodes.size())
+		{
 			distance += atspMatrix[nodes[i]][nodes[i + 1]];
+		}
 		else
 			distance += atspMatrix[nodes[i]][startingNode];
+	}
+	return distance;
+}
+
+int ATSPMatrix::calculatePartialPath(std::vector<int> nodes)
+{
+	int distance = 0;
+	for (int i = 0; i < (int)nodes.size()-1; i++)
+	{
+		distance += atspMatrix[nodes[i]][nodes[i + 1]];
 	}
 	return distance;
 }
@@ -97,8 +109,10 @@ void ATSPMatrix::bruteForce()
 	} while (std::next_permutation(nodes.begin(), nodes.end()));
 	std::cout << "Shortest path length: " << shortestPathLength;
 	std::cout << "\nNodes: ";
+	std::cout << "0->";
 	for (const int x : shortestPathNodes)
-		std::cout << x << " ";
+		std::cout << x << "->";
+	std::cout << "0";
 	std::cout << std::endl;
 }
 
@@ -110,6 +124,16 @@ std::string ATSPMatrix::getName()
 int ATSPMatrix::getDimension()
 {
 	return dimension;
+}
+
+int ATSPMatrix::getStartingNode()
+{
+	return startingNode;
+}
+
+std::vector<std::vector<int>> ATSPMatrix::getMatrix()
+{
+	return atspMatrix;
 }
 
 ATSPMatrix::ATSPMatrix()
