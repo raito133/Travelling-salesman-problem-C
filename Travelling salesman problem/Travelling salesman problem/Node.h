@@ -9,7 +9,7 @@ class Node
 	std::vector<int> vertices;
 public:
 	std::vector<int> getVertices();
-	Node(std::vector<int> newVertices, int newVertice, std::vector<std::vector<int>> atspMatrix);
+	Node(std::vector<int> newVertices, int newVertice, std::vector<std::vector<int>> &atspMatrix);
 	bool visited(int vertice);
 	int getBound();
 	~Node();

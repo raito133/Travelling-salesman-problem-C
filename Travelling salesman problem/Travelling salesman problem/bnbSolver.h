@@ -8,7 +8,7 @@ class bnbSolver
 
 public:
 	void solve();
-	bnbSolver(ATSPMatrix atspMatrix);
+	bnbSolver(ATSPMatrix &atspMatrix);
 	~bnbSolver();
 };
 

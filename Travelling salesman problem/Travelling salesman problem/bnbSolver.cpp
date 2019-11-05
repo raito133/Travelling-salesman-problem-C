@@ -49,7 +49,7 @@ void bnbSolver::solve()
 {
 	std::priority_queue<Node*, std::vector<Node*>, comp> pq;
 	std::vector<int> currentVertices;
-	Node* root = new Node(currentVertices, 0, currentMatrix.getMatrix());
+	Node* root = new Node(currentVertices, 0, *&currentMatrix.getMatrix());
 	int bestPartialPath = -1;
 	std::vector<int> bestVertices = root->getVertices();
 	pq.push(root);
@@ -71,7 +71,7 @@ void bnbSolver::solve()
 
 				if (min->visited(i))
 					continue;
-				Node* child = new Node(min->getVertices(), i, currentMatrix.getMatrix());
+				Node* child = new Node(min->getVertices(), i, *&currentMatrix.getMatrix());
 				if (currentMatrix.calculatePartialPath(child->getVertices())< bestPartialPath || bestPartialPath == -1)
 				{
 					bestPartialPath = currentMatrix.calculatePartialPath(child->getVertices());
@@ -104,7 +104,7 @@ void bnbSolver::solve()
 	
 }
 
-bnbSolver::bnbSolver(ATSPMatrix atspMatrix)
+bnbSolver::bnbSolver(ATSPMatrix &atspMatrix)
 {
 	currentMatrix = atspMatrix;
 }

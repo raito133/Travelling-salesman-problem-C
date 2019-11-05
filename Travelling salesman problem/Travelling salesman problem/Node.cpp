@@ -23,7 +23,7 @@ std::vector<int> Node::getVertices()
 	return vertices;
 }
 
-Node::Node(std::vector<int> newVertices, int newVertice, std::vector<std::vector<int>> atspMatrix)
+Node::Node(std::vector<int> newVertices, int newVertice, std::vector<std::vector<int>> &atspMatrix)
 {
 	vertices = newVertices;
 	vertices.push_back(newVertice);
