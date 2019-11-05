@@ -50,21 +50,19 @@ void bnbSolver::solve()
 	std::priority_queue<Node*, std::vector<Node*>, comp> pq;
 	std::vector<int> currentVertices;
 	Node* root = new Node(currentVertices, 0, *&currentMatrix.getMatrix());
-	int bestPartialPath = -1;
+	int bestPathLength = -1;
 	std::vector<int> bestVertices = root->getVertices();
 	pq.push(root);
-	int iterations = 0;
 	while (!pq.empty())
 	{
 		Node* min = pq.top();
 		pq.pop();
-		if (min->getVertices().size() == currentMatrix.getDimension())
+		/*if (min->getVertices().size() == currentMatrix.getDimension())
 		{
 			bestVertices = min->getVertices();
 			break;
-		}
-		
-		if (min->getBound() > bestPartialPath)
+		}*/
+		if (min->getBound() <= bestPathLength || bestPathLength == -1)
 		{
 			for (int i = 1; i < currentMatrix.getDimension(); i++)
 			{
@@ -72,21 +70,54 @@ void bnbSolver::solve()
 				if (min->visited(i))
 					continue;
 				Node* child = new Node(min->getVertices(), i, *&currentMatrix.getMatrix());
-				if (currentMatrix.calculatePartialPath(child->getVertices())< bestPartialPath || bestPartialPath == -1)
+
+				if (child->getVertices().size() == currentMatrix.getDimension())
 				{
-					bestPartialPath = currentMatrix.calculatePartialPath(child->getVertices());
-					bestVertices = child->getVertices();
-				}
-				if (bestPartialPath < child->getBound())
-				{
-					pq.push(child);
+					std::vector<int> currentVertices = child->getVertices();
+					for (const int x : child->getVertices())
+						std::cout << x << " ";
+					std::cout << "\n";
+					currentVertices.erase(currentVertices.begin());
+					if (bestPathLength > currentMatrix.calculatePath(currentVertices) || bestPathLength == -1)
+					{
+						std::cout << "\nBestPathLength: " << bestPathLength << " vs " << currentMatrix.calculatePath(currentVertices) << "\n";
+						bestPathLength = currentMatrix.calculatePath(currentVertices);
+						bestVertices = child->getVertices();
+					}
+					delete child;
+
+
 				}
 				else
-					delete child;
+				{
+					if (bestPathLength >= child->getBound() || bestPathLength == -1)
+					{
+						/*std::cout << "galaz: ";
+						for (const int x : child->getVertices())
+						std::cout << x << " ";
+						std::cout << "Bound: " << child->getBound() << std::endl;*/
+						pq.push(child);
+					}
+					else
+					{
+						/*std::cout << "Odrzucam galaz: ";
+						for (const int x : child->getVertices())
+						std::cout << x << " ";
+						std::cout << "Bound: " << child->getBound() << std::endl;*/
+						delete child;
+					}
+
+				}
+
+
 			}
 		}
+		else
+		{
+			/*std::cout << "Skip: " << min->getBound() << " vs " << bestPathLength;*/
+			break;
+		}
 		delete min;
-		iterations++;
 						
 	}
 	//clean
