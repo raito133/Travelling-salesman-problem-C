@@ -18,6 +18,11 @@ int Node::findMin(int row)
 	return min;
 }
 
+std::vector<int> Node::getVertices()
+{
+	return vertices;
+}
+
 Node::Node(std::vector<int> newVertices, int newVertice, std::vector<std::vector<int>> atspMatrix)
 {
 	vertices = newVertices;
