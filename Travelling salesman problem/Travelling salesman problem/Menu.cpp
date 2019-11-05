@@ -33,6 +33,7 @@ void Menu::displayMain()
 void Menu::bfDispl()
 {
 	currentMatrix.bruteForce();
+	currentMatrix.printShortestPath();
 }
 
 void Menu::pr1Displ()

@@ -19,7 +19,6 @@ class Menu
 public:
 	Menu();
 	~Menu();
-	
 	bool isRunning();
 	void run();
 
