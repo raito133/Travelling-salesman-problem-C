@@ -70,14 +70,13 @@ bool ATSPMatrix::loadFile(std::string fileName)
 		if (line == "DIMENSION:")
 			load >> dimension;
 	}
-
 	for (int i = 0; i < dimension; i++) {
 		std::vector<int> row;
 		if (i != 0)
 			nodes.push_back(i);
 		for (int j = 0; j < dimension; j++) {
 			load >> number;
-			if (number == 9999)
+			if (i == j)
 				number = -1;
 			row.push_back(number);
 		}
