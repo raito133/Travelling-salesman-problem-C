@@ -58,9 +58,9 @@ void bnbSolver::solve()
 	{
 		Node* min = pq.top();
 		pq.pop();
-		if (min->getVertices.size() == currentMatrix.getDimension())
+		if (min->getVertices().size() == currentMatrix.getDimension())
 		{
-			bestVertices = min->getVertices;
+			bestVertices = min->getVertices();
 			break;
 		}
 		
@@ -71,11 +71,11 @@ void bnbSolver::solve()
 
 				if (min->visited(i))
 					continue;
-				Node* child = new Node(min->getVertices, i, currentMatrix.getMatrix());
-				if (currentMatrix.calculatePartialPath(child->getVertices)< bestPartialPath || bestPartialPath == -1)
+				Node* child = new Node(min->getVertices(), i, currentMatrix.getMatrix());
+				if (currentMatrix.calculatePartialPath(child->getVertices())< bestPartialPath || bestPartialPath == -1)
 				{
-					bestPartialPath = currentMatrix.calculatePartialPath(child->getVertices);
-					bestVertices = child->getVertices;
+					bestPartialPath = currentMatrix.calculatePartialPath(child->getVertices());
+					bestVertices = child->getVertices();
 				}
 				if (bestPartialPath < child->getBound())
 				{
