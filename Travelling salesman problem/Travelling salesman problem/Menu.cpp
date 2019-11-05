@@ -2,11 +2,11 @@
 #include "Menu.h"
 
 
-
 Menu::Menu()
 {
 	choice = -1;
 	running = false;
+	QueryPerformanceFrequency(&frequency);
 }
 
 
@@ -32,14 +32,22 @@ void Menu::displayMain()
 
 void Menu::bfDispl()
 {
+	
+	start = getTime();
 	currentMatrix.bruteForce();
+	end = getTime();
+	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << std::endl;
 	currentMatrix.printShortestPath();
 }
 
 void Menu::pr1Displ()
 {
 	bnbsolv = new bnbSolver(currentMatrix);
+	start = getTime();
 	bnbsolv->solve();
+	end = getTime();
+	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << std::endl;
+	bnbsolv->printShortestPath();
 	delete bnbsolv;
 
 }
@@ -114,4 +122,13 @@ void Menu::run()
 		}
 
 	}
+}
+
+LARGE_INTEGER Menu::getTime()
+{
+	LARGE_INTEGER time;
+	DWORD_PTR oldmask = SetThreadAffinityMask(GetCurrentThread(), 0);
+	QueryPerformanceCounter(&time);
+	SetThreadAffinityMask(GetCurrentThread(), oldmask);
+	return time;
 }
