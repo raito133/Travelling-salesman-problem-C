@@ -23,8 +23,8 @@ void Menu::displayMain()
 {
 	std::cout << "Travelling salesman problem" << std::endl;
 	std::cout << "0. Brute-force search" << std::endl;
-	std::cout << "1. PR1. " << std::endl;
-	std::cout << "2. PR2. " << std::endl;
+	std::cout << "1. PR1. Branch and Bound" << std::endl;
+	std::cout << "2. PR2. NN" << std::endl;
 	std::cout << "3. PR3. Genetic algorithm" << std::endl;
 	std::cout << "4. File management" << std::endl;
 	std::cout << "5. Exit";
