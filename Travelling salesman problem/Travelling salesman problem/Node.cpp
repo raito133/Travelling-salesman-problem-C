@@ -6,7 +6,7 @@ int Node::findMin(int row)
 {
 	int min = -1;
 	int currentNumber;
-	for (int i = 0; i < matrix.size(); i++)
+	for (int i = 0; i < (int)matrix.size(); i++)
 	{
 		if (matrix[row][i] == -1)
 			continue;
@@ -36,15 +36,15 @@ int Node::getBound()
 	int calculateBound = 0;
 	if (vertices.size() == 1)
 	{
-		for (int i = 0; i < matrix.size(); i++)
+		for (int i = 0; i < (int)matrix.size(); i++)
 		{
 			calculateBound += findMin(i);
 		}
 		return calculateBound;
 	}
-	for (int i = 0; i<vertices.size()-1; i++)
+	for (int i = 0; i<(int)vertices.size()-1; i++)
 		calculateBound += matrix[vertices[i]][vertices[i + 1]];
-	for (int i = 0; i < matrix.size(); i++)
+	for (int i = 0; i < (int)matrix.size(); i++)
 	{
 		if (visitedNotLast(i))
 			continue;
@@ -55,7 +55,7 @@ int Node::getBound()
 
 bool Node::visitedNotLast(int vertice)
 {
-	for (int i = 0; i < vertices.size() - 1; i++)
+	for (int i = 0; i < (int)vertices.size() - 1; i++)
 	{
 		if (vertices[i] == vertice)
 			return true;
