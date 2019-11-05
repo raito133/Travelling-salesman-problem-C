@@ -11,12 +11,15 @@ class ATSPMatrix
 	std::string name;
 	std::vector<std::vector<int>> atspMatrix;
 	std::vector<int> nodes;
+	std::vector<int> shortestPathNodesPrint;
 	int startingNode = 0;
+	int shortestPathLengthPrint;
 	
 public:
 	void printMatrix();
 	bool loadFile(std::string fileName);
 	void bruteForce();
+	void printShortestPath();
 	std::string getName();
 	int getDimension();
 	int getStartingNode();

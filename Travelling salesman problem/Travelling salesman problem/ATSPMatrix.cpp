@@ -107,10 +107,16 @@ void ATSPMatrix::bruteForce()
 		}
 
 	} while (std::next_permutation(nodes.begin(), nodes.end()));
-	std::cout << "Shortest path length: " << shortestPathLength;
+	shortestPathLengthPrint = shortestPathLength;
+	shortestPathNodesPrint = shortestPathNodes;
+}
+
+void ATSPMatrix::printShortestPath()
+{
+	std::cout << "Shortest path length: " << shortestPathLengthPrint;
 	std::cout << "\nNodes: ";
 	std::cout << "0->";
-	for (const int x : shortestPathNodes)
+	for (const int x : shortestPathNodesPrint)
 		std::cout << x << "->";
 	std::cout << "0";
 	std::cout << std::endl;
