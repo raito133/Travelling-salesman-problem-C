@@ -11,10 +11,10 @@
 class ATSPMatrix
 {
 	int dimension;
-	std::string name;
-	std::vector<std::vector<int>> atspMatrix;
-	std::vector<int> nodes;
-	std::vector<int> shortestPathNodesPrint;
+	std::string name; //name of the file
+	std::vector<std::vector<int>> atspMatrix; //matrix for storing the problem
+	std::vector<int> nodes; //printing
+	std::vector<int> shortestPathNodesPrint; //shortestPath for printing
 	int startingNode = 0;
 	int shortestPathLengthPrint;
 	
@@ -27,8 +27,8 @@ public:
 	std::string getName();
 	int getDimension();
 	int getStartingNode();
-	int calculatePath(std::vector<int> nodes);
-	int calculatePartialPath(std::vector<int> nodes);
+	int calculatePath(std::vector<int> nodes); //calculate the cost of the entire path
+	int calculatePartialPath(std::vector<int> nodes); //calculating the cost of the path so far
 	std::vector<std::vector<int>> getMatrix();
 	ATSPMatrix();
 	~ATSPMatrix();

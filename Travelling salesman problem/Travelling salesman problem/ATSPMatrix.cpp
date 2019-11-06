@@ -4,6 +4,8 @@
 
 int ATSPMatrix::calculatePath(std::vector<int> nodes)
 {
+	//take nodes and add edges for them
+	//adds node 0 at start and end of the path
 	int distance = 0;
 	distance = atspMatrix[startingNode][nodes[0]];
 	for (int i = 0; i < (int)nodes.size(); i++)
@@ -119,6 +121,7 @@ void ATSPMatrix::bruteForce()
 		for (int i = 0; i < (int)nodes.size(); i++)
 		{
 			currentPath = calculatePath(nodes);
+			//compare new path with the best path so far
 			if (shortestPathLength == -1 || currentPath < shortestPathLength)
 			{
 				shortestPathNodes = nodes;

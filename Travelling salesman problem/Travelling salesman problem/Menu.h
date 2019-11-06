@@ -12,16 +12,16 @@ class Menu
 {
 	int choice;
 	bool running;
-	//wyswietlanie menu
+	//menu displays
 	void displayMain();
 	void bfDispl();
 	void pr1Displ();
 	void pr2Displ();
 	void pr3Displ();
 	void filDispl();
-	//funkcja testowa
+	//test function
 	void test();
-	//zmienne do obliczania czasu
+	//time counting
 	LARGE_INTEGER getTime();
 	ATSPMatrix currentMatrix;
 	bnbSolver* bnbsolv;

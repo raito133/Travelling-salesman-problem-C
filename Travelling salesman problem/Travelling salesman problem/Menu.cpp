@@ -96,11 +96,11 @@ void Menu::test()
 {
 	std::ofstream save("results.txt");
 	double saveTimeBf, saveTimeBnB;
-	/*
-	for (int i = 11; i <= 12; i = i + 2)
+	
+	for (int i = 4; i <= 10; i = i + 2)
 	{
-		saveTimeBf.QuadPart = 0;
-		saveTimeBnB.QuadPart = 0;
+		saveTimeBf= 0;
+		saveTimeBnB = 0;
 		std::cout << i << "\n";
 		for (int j = 0; j <= 100; j++)
 		{
@@ -110,20 +110,20 @@ void Menu::test()
 			start = getTime();
 			currentMatrix.bruteForce();
 			end = getTime();
-			saveTimeBf.QuadPart += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
+			saveTimeBf += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
 			
 			start = getTime();
 			bnbsolv->solve();
 			end = getTime();
-			saveTimeBf.QuadPart += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
+			saveTimeBnB += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
 			
 			delete bnbsolv;
 		}
-		save << "Dimension: " << i << "Time for bruteForce: " << saveTimeBf.QuadPart / 100.0 << "ms\n";
-		save << "Dimension: " << i << "Time for BnB: " << saveTimeBnB.QuadPart/100.0 << "ms\n";
-	}*/
+		save << "Dimension: " << i << "Time for bruteForce: " << saveTimeBf/ 100.0 << "ms\n";
+		save << "Dimension: " << i << "Time for BnB: " << saveTimeBnB/100.0 << "ms\n";
+	}
 	
-	for (int i = 11; i <= 11; i = i + 2)
+	for (int i = 12; i <= 14; i = i + 2)
 	{
 		saveTimeBnB = 0;
 		std::cout << i << "\n";

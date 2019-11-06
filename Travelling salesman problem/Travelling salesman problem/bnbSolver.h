@@ -5,7 +5,7 @@
 class bnbSolver
 {
 	ATSPMatrix currentMatrix;
-	std::vector<int> shortestPathVertices;
+	std::vector<int> shortestPathVertices; //vertices for printing
 public:
 	void solve();
 	void printShortestPath();
