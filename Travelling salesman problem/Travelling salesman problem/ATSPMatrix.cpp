@@ -51,6 +51,27 @@ void ATSPMatrix::printMatrix()
 	}
 }
 
+void ATSPMatrix::generateRandom(int size)
+{
+	atspMatrix.clear();
+	nodes.clear();
+	int number;
+	dimension = size;
+	for (int i = 0; i < dimension; i++) {
+		std::vector<int> row;
+		if (i != 0)
+			nodes.push_back(i);
+		for (int j = 0; j < dimension; j++) {
+			number = rand() % 100;
+			if (i == j)
+				number = -1;
+			row.push_back(number);
+		}
+		atspMatrix.push_back(row);
+	}
+
+}
+
 bool ATSPMatrix::loadFile(std::string fileName)
 {
 	std::ifstream load;
@@ -145,6 +166,7 @@ ATSPMatrix::ATSPMatrix()
 {
 	dimension = 0;
 	startingNode = 0;
+	srand(time(NULL));
 }
 
 

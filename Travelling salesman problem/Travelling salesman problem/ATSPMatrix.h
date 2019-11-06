@@ -5,6 +5,9 @@
 #include <string>
 #include <iomanip>
 #include <algorithm>
+#include <ctime>
+#include <random>
+
 class ATSPMatrix
 {
 	int dimension;
@@ -16,6 +19,7 @@ class ATSPMatrix
 	int shortestPathLengthPrint;
 	
 public:
+	void generateRandom(int size);
 	void printMatrix();
 	bool loadFile(std::string fileName);
 	void bruteForce();
