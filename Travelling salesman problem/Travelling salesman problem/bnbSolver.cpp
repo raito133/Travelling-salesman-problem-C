@@ -23,7 +23,7 @@ void bnbSolver::solve()
 	{
 		Node* min = pq.top();
 		pq.pop();
-		if (min->getBound() <= bestPathLength || bestPathLength == -1)
+		if (min->getBound() < bestPathLength || bestPathLength == -1)
 		{
 			for (int i = 1; i < currentMatrix.getDimension(); i++)
 			{
@@ -43,17 +43,14 @@ void bnbSolver::solve()
 					}
 					delete child;
 
-
 				}
 				else
 				{
-					if (bestPathLength >= child->getBound() || bestPathLength == -1)
+					if (bestPathLength > child->getBound() || bestPathLength == -1)
 						pq.push(child);
 					else
 						delete child;
-
 				}
-
 
 			}
 		}
@@ -77,7 +74,8 @@ void bnbSolver::solve()
 void bnbSolver::printShortestPath()
 {
 	for (const int x : shortestPathVertices)
-		std::cout << x << " ";
+		std::cout << x << "->";
+	std::cout << "->0\n";
 	shortestPathVertices.erase(shortestPathVertices.begin());
 	std::cout << "Path length: " << currentMatrix.calculatePath(shortestPathVertices) << "\n";
 }
