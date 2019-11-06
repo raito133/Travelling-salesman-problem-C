@@ -75,7 +75,7 @@ void Menu::filDispl()
 			std::cout << "Enter the name of the file stored in /data/ folder(without extension): ";
 			std::cin >> fileName;
 			fileName.insert(0, "data/");
-			fileName.append(".atsp");
+			//fileName.append(".atsp");
 			if(currentMatrix.loadFile(fileName))
 				std::cout << "Loaded file: " << currentMatrix.getName() << std::endl << "Dimension: " << currentMatrix.getDimension() << std::endl;
 			else
