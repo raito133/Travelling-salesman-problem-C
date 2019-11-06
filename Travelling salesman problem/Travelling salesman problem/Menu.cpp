@@ -36,7 +36,7 @@ void Menu::bfDispl()
 	start = getTime();
 	currentMatrix.bruteForce();
 	end = getTime();
-	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << std::endl;
+	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << "ms" << std::endl;
 	currentMatrix.printShortestPath();
 }
 
@@ -46,7 +46,7 @@ void Menu::pr1Displ()
 	start = getTime();
 	bnbsolv->solve();
 	end = getTime();
-	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << std::endl;
+	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << "ms" << std::endl;
 	bnbsolv->printShortestPath();
 	delete bnbsolv;
 
@@ -92,6 +92,59 @@ void Menu::filDispl()
 
 }
 
+void Menu::test()
+{
+	std::ofstream save("results.txt");
+	double saveTimeBf, saveTimeBnB;
+	/*
+	for (int i = 11; i <= 12; i = i + 2)
+	{
+		saveTimeBf.QuadPart = 0;
+		saveTimeBnB.QuadPart = 0;
+		std::cout << i << "\n";
+		for (int j = 0; j <= 100; j++)
+		{
+			std::cout << j;
+			bnbsolv = new bnbSolver(currentMatrix);
+			currentMatrix.generateRandom(i);
+			start = getTime();
+			currentMatrix.bruteForce();
+			end = getTime();
+			saveTimeBf.QuadPart += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
+			
+			start = getTime();
+			bnbsolv->solve();
+			end = getTime();
+			saveTimeBf.QuadPart += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
+			
+			delete bnbsolv;
+		}
+		save << "Dimension: " << i << "Time for bruteForce: " << saveTimeBf.QuadPart / 100.0 << "ms\n";
+		save << "Dimension: " << i << "Time for BnB: " << saveTimeBnB.QuadPart/100.0 << "ms\n";
+	}*/
+	
+	for (int i = 11; i <= 11; i = i + 2)
+	{
+		saveTimeBnB = 0;
+		std::cout << i << "\n";
+		for (int j = 0; j <= 100; j++)
+		{
+			std::cout << j;
+			bnbsolv = new bnbSolver(currentMatrix);
+			currentMatrix.generateRandom(i);
+
+			start = getTime();
+			bnbsolv->solve();
+			end = getTime();
+			saveTimeBnB += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
+
+			delete bnbsolv;
+		}
+		save << "Dimension: " << i << "Time for BnB: " << saveTimeBnB / 100.0 << "ms\n";
+	}
+	save.close();
+}
+
 
 void Menu::run()
 {
@@ -116,6 +169,8 @@ void Menu::run()
 		case 4:
 			filDispl();
 			break;
+		case 113:
+			test();
 		case 5:
 			running = false;
 			break;

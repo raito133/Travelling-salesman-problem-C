@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include "ATSPMatrix.h"
 #include "bnbSolver.h"
+#include <fstream>
 
 #undef max
 
@@ -11,12 +12,16 @@ class Menu
 {
 	int choice;
 	bool running;
+	//wyswietlanie menu
 	void displayMain();
 	void bfDispl();
 	void pr1Displ();
 	void pr2Displ();
 	void pr3Displ();
 	void filDispl();
+	//funkcja testowa
+	void test();
+	//zmienne do obliczania czasu
 	LARGE_INTEGER getTime();
 	ATSPMatrix currentMatrix;
 	bnbSolver* bnbsolv;
