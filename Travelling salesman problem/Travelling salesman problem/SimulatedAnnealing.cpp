@@ -64,34 +64,40 @@ std::vector<int> SimulatedAnnealing::anneal()
 	bestSolution = currentSolution;
 	std::vector<int> nearbySolution;
 
+	int startingTemperature = temperature;
+
 	// iterations determine how many solutions do we want to check for a given temperature level
-	currentSolution = getStartingSolution();
 
-	while (temperature > absoluteTemperature)
+	for (int i = 0; i < restarts; i++)
 	{
-		for (int i = 0; i < iterations; i++)
+		temperature = startingTemperature;
+		currentSolution = bestSolution;
+		while (temperature > absoluteTemperature)
 		{
-			nearbySolution = getNextSolution(currentSolution);
-
-			// remember the best solution so far
-			if (calculatePath(nearbySolution) < calculatePath(bestSolution))
-				bestSolution = nearbySolution;
-
-			deltaDistance = calculatePath(nearbySolution) - calculatePath(currentSolution);
-
-			// if the current solution is better it is accepted 
-			if (deltaDistance < 0)
-				currentSolution = nearbySolution;
-
-			// if not we use the temperature and random factor to determine if we should accept it
-			else
+			for (int i = 0; i < iterations; i++)
 			{
-				if (exp(-deltaDistance / temperature) > distribution(generator))
+				nearbySolution = getNextSolution(currentSolution);
+
+				// remember the best solution so far
+				if (calculatePath(nearbySolution) < calculatePath(bestSolution))
+					bestSolution = nearbySolution;
+
+				deltaDistance = calculatePath(nearbySolution) - calculatePath(currentSolution);
+
+				// if the current solution is better it is accepted 
+				if (deltaDistance < 0)
 					currentSolution = nearbySolution;
 
+				// if not we use the temperature and random factor to determine if we should accept it
+				else
+				{
+					if (exp(-deltaDistance / temperature) > distribution(generator))
+						currentSolution = nearbySolution;
+
+				}
 			}
+			temperature = changeTemperature(temperature);
 		}
-		temperature = changeTemperature(temperature);
 	}
 	return bestSolution;
 }
@@ -117,17 +123,30 @@ void SimulatedAnnealing::printSolution()
 	std::cout << "0->";
 	for (const int x : bestSolution)
 		std::cout << x << "->";
-	std::cout << "->0" << "\n";
+	std::cout << "0" << "\n";
 	std::cout << "Distance: " << getSolutionDistance() << "\n";
 }
+
 
 SimulatedAnnealing::SimulatedAnnealing(ATSPMatrix newAtspMatrix)
 {
 	matrix = newAtspMatrix.getMatrix();
-	temperature = 10000000000.0;
-	absoluteTemperature = 0.0001;
-	coolingRate = 0.99;
-	iterations = matrix.size() * 4; // we check more similar paths the bigger the matrix
+	this->temperature = 1000.0;
+	this->absoluteTemperature = 0.0001;
+	this->coolingRate = 0.99;
+	this->iterations = matrix.size();
+	this->restarts = 3;
+}
+
+SimulatedAnnealing::SimulatedAnnealing(ATSPMatrix newAtspMatrix, double temperature, double coolingRate, double absoluteTemperature, int iterations, int restarts)
+{
+	matrix = newAtspMatrix.getMatrix();
+	this->temperature = temperature;
+	this->absoluteTemperature = absoluteTemperature;
+	this->coolingRate = coolingRate;
+	this->iterations = iterations;
+	this->restarts = restarts;
+
 }
 
 

@@ -24,6 +24,7 @@ public:
 	int getSolutionDistance();
 	void printSolution();
 	SimulatedAnnealing(ATSPMatrix atspMatrix);
+	SimulatedAnnealing(ATSPMatrix atspMatrix, double temperature, double coolingRate, double absoluteTemperature, int iterations, int restarts);
 	~SimulatedAnnealing();
 };
 
