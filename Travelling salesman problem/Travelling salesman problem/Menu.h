@@ -18,6 +18,7 @@ class Menu
 	void bfDispl();
 	void pr1Displ();
 	void pr2Displ();
+	void pr2DisplDefault();
 	void pr3Displ();
 	void filDispl();
 	//test function
