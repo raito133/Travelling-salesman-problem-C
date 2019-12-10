@@ -24,7 +24,7 @@ void Menu::displayMain()
 	std::cout << "Travelling salesman problem" << std::endl;
 	std::cout << "0. Brute-force search" << std::endl;
 	std::cout << "1. PR1. Branch and Bound" << std::endl;
-	std::cout << "2. PR2. NN" << std::endl;
+	std::cout << "2. PR2. Simulated Annealing" << std::endl;
 	std::cout << "3. PR3. Genetic algorithm" << std::endl;
 	std::cout << "4. File management" << std::endl;
 	std::cout << "5. Exit";
@@ -54,6 +54,13 @@ void Menu::pr1Displ()
 
 void Menu::pr2Displ()
 {
+	simulatedAnnealing = new SimulatedAnnealing(currentMatrix);
+	start = getTime();
+	simulatedAnnealing->run();
+	end = getTime();
+	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << "ms" << std::endl;
+	simulatedAnnealing->printSolution();
+	delete simulatedAnnealing;
 }
 
 void Menu::pr3Displ()
