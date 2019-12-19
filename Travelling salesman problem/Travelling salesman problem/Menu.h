@@ -4,6 +4,7 @@
 #include "ATSPMatrix.h"
 #include "bnbSolver.h"
 #include <fstream>
+#include "SimulatedAnnealing.h"
 
 #undef max
 
@@ -17,6 +18,7 @@ class Menu
 	void bfDispl();
 	void pr1Displ();
 	void pr2Displ();
+	void pr2DisplDefault();
 	void pr3Displ();
 	void filDispl();
 	//test function
@@ -25,6 +27,7 @@ class Menu
 	LARGE_INTEGER getTime();
 	ATSPMatrix currentMatrix;
 	bnbSolver* bnbsolv;
+	SimulatedAnnealing* simulatedAnnealing;
 	LARGE_INTEGER start, end, frequency;
 
 	

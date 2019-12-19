@@ -24,7 +24,7 @@ void Menu::displayMain()
 	std::cout << "Travelling salesman problem" << std::endl;
 	std::cout << "0. Brute-force search" << std::endl;
 	std::cout << "1. PR1. Branch and Bound" << std::endl;
-	std::cout << "2. PR2. NN" << std::endl;
+	std::cout << "2. PR2. Simulated Annealing (20 for no parameters)" << std::endl;
 	std::cout << "3. PR3. Genetic algorithm" << std::endl;
 	std::cout << "4. File management" << std::endl;
 	std::cout << "5. Exit";
@@ -54,6 +54,28 @@ void Menu::pr1Displ()
 
 void Menu::pr2Displ()
 {
+	double temperature, absoluteTemperature, coolingRate;
+	int iterations, restarts;
+	std::cout << "Prosze podac: temperature, temperature koncowa, mnoznik obnizania temperatury, liczbe iteracji na poziom temperatury, liczbe restartow\n";
+	std::cin >> temperature >> absoluteTemperature >> coolingRate >> iterations >> restarts;
+	simulatedAnnealing = new SimulatedAnnealing(currentMatrix, temperature, coolingRate, absoluteTemperature, iterations, restarts);
+	start = getTime();
+	simulatedAnnealing->run();
+	end = getTime();
+	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << "ms" << std::endl;
+	simulatedAnnealing->printSolution();
+	delete simulatedAnnealing;
+}
+
+void Menu::pr2DisplDefault()
+{
+	simulatedAnnealing = new SimulatedAnnealing(currentMatrix);
+	start = getTime();
+	simulatedAnnealing->run();
+	end = getTime();
+	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << "ms" << std::endl;
+	simulatedAnnealing->printSolution();
+	delete simulatedAnnealing;
 }
 
 void Menu::pr3Displ()
@@ -87,6 +109,8 @@ void Menu::filDispl()
 		case 3:
 			run = false;
 			break;
+		default:
+			break;
 		}
 	}
 
@@ -95,52 +119,25 @@ void Menu::filDispl()
 void Menu::test()
 {
 	std::ofstream save("results.txt");
-	double saveTimeBf, saveTimeBnB;
+	double saveTimeSA;
 	
-	for (int i = 4; i <= 10; i = i + 2)
+	for (int i = 800; i <= 1000; i = i + 200)
 	{
-		saveTimeBf= 0;
-		saveTimeBnB = 0;
-		std::cout << i << "\n";
+		saveTimeSA = 0;
+		std::cout << i << " \n";
+
 		for (int j = 0; j <= 100; j++)
 		{
 			std::cout << j;
-			bnbsolv = new bnbSolver(currentMatrix);
+			simulatedAnnealing = new SimulatedAnnealing(currentMatrix);
 			currentMatrix.generateRandom(i);
 			start = getTime();
-			currentMatrix.bruteForce();
+			simulatedAnnealing->run();
 			end = getTime();
-			saveTimeBf += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
-			
-			start = getTime();
-			bnbsolv->solve();
-			end = getTime();
-			saveTimeBnB += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
-			
-			delete bnbsolv;
+			saveTimeSA += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
+			delete simulatedAnnealing;
 		}
-		save << "Dimension: " << i << "Time for bruteForce: " << saveTimeBf/ 100.0 << "ms\n";
-		save << "Dimension: " << i << "Time for BnB: " << saveTimeBnB/100.0 << "ms\n";
-	}
-	
-	for (int i = 12; i <= 14; i = i + 2)
-	{
-		saveTimeBnB = 0;
-		std::cout << i << "\n";
-		for (int j = 0; j <= 100; j++)
-		{
-			std::cout << j;
-			bnbsolv = new bnbSolver(currentMatrix);
-			currentMatrix.generateRandom(i);
-
-			start = getTime();
-			bnbsolv->solve();
-			end = getTime();
-			saveTimeBnB += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
-
-			delete bnbsolv;
-		}
-		save << "Dimension: " << i << "Time for BnB: " << saveTimeBnB / 100.0 << "ms\n";
+		save << "Dimension: " << i << "Time for Simulated Annealing: " << saveTimeSA / 100.0 << "ms\n";
 	}
 	save.close();
 }
@@ -169,8 +166,12 @@ void Menu::run()
 		case 4:
 			filDispl();
 			break;
+		case 20:
+			pr2DisplDefault();
+			break;
 		case 113:
 			test();
+			break;
 		case 5:
 			running = false;
 			break;
