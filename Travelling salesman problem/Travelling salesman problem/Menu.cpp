@@ -25,7 +25,7 @@ void Menu::displayMain()
 	std::cout << "0. Brute-force search" << std::endl;
 	std::cout << "1. PR1. Branch and Bound" << std::endl;
 	std::cout << "2. PR2. Simulated Annealing (20 for no parameters)" << std::endl;
-	std::cout << "3. PR3. Genetic algorithm" << std::endl;
+	std::cout << "3. PR3. Genetic algorithm (30 for default parameters)" << std::endl;
 	std::cout << "4. File management" << std::endl;
 	std::cout << "5. Exit";
 }
@@ -80,7 +80,30 @@ void Menu::pr2DisplDefault()
 
 void Menu::pr3Displ()
 {
+	std::cout << "Prosze podac: rozmiar populacji, typ mutacji(0 inwersja, 1 transpozycja), wspó³czynnik mutacji, wspó³czynnik krzy¿owania, maksymaln¹ stagnacjê, rozmiar turnieju\n";
+	int population, stagnationMax, tournamentSize;
+	bool mutation;
+	double mutationRate, matingRatio;
+	std::cin >> population >> mutation >> mutationRate >> matingRatio >> stagnationMax >> tournamentSize;
+	geneticAlgorithm = new GeneticAlgorithm(currentMatrix, population, mutation, mutationRate, matingRatio, stagnationMax, tournamentSize);
+	start = getTime();
+	geneticAlgorithm->run();
+	end = getTime();
+	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << "ms" << std::endl;
+	delete geneticAlgorithm;
 }
+
+// for quick testing
+void Menu::pr3DisplDefault()
+{
+	geneticAlgorithm = new GeneticAlgorithm(currentMatrix, 300, false, 0.1, 0.50, 50, 50);
+	start = getTime();
+	geneticAlgorithm->run();
+	end = getTime();
+	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << "ms" << std::endl;
+	delete geneticAlgorithm;
+}
+
 
 void Menu::filDispl()
 {
@@ -169,6 +192,8 @@ void Menu::run()
 		case 20:
 			pr2DisplDefault();
 			break;
+		case 30:
+			pr3DisplDefault();
 		case 113:
 			test();
 			break;

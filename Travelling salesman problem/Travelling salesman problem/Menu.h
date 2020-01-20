@@ -5,6 +5,7 @@
 #include "bnbSolver.h"
 #include <fstream>
 #include "SimulatedAnnealing.h"
+#include "GeneticAlgorithm.h"
 
 #undef max
 
@@ -21,6 +22,7 @@ class Menu
 	void pr2DisplDefault();
 	void pr3Displ();
 	void filDispl();
+	void pr3DisplDefault();
 	//test function
 	void test();
 	//time counting
@@ -29,6 +31,7 @@ class Menu
 	bnbSolver* bnbsolv;
 	SimulatedAnnealing* simulatedAnnealing;
 	LARGE_INTEGER start, end, frequency;
+	GeneticAlgorithm* geneticAlgorithm;
 
 	
 public:
