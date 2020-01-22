@@ -80,27 +80,29 @@ void Menu::pr2DisplDefault()
 
 void Menu::pr3Displ()
 {
-	std::cout << "Prosze podac: rozmiar populacji, typ mutacji(0 inwersja, 1 transpozycja), wspó³czynnik mutacji, wspó³czynnik krzy¿owania, maksymaln¹ stagnacjê, rozmiar turnieju\n";
-	int population, stagnationMax, tournamentSize;
+	std::cout << "Prosze podac: rozmiar populacji, typ mutacji(0 inwersja, 1 transpozycja), wspolczynnik mutacji, wspolczynik krzyzowania, maksymalna stagnacje, rozmiar turnieju, wspolczynnik elityzmu, maksymalna generacje\n";
+	int population, stagnationMax, tournamentSize, maxGeneration;
 	bool mutation;
-	double mutationRate, matingRatio;
-	std::cin >> population >> mutation >> mutationRate >> matingRatio >> stagnationMax >> tournamentSize;
-	geneticAlgorithm = new GeneticAlgorithm(currentMatrix, population, mutation, mutationRate, matingRatio, stagnationMax, tournamentSize);
+	double mutationRate, matingRatio, elitismRate;
+	std::cin >> population >> mutation >> mutationRate >> matingRatio >> stagnationMax >> tournamentSize >> elitismRate >> maxGeneration;
+	geneticAlgorithm = new GeneticAlgorithm(currentMatrix, population, mutation, mutationRate, matingRatio, stagnationMax, tournamentSize, elitismRate, maxGeneration);
 	start = getTime();
 	geneticAlgorithm->run();
 	end = getTime();
 	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << "ms" << std::endl;
+	geneticAlgorithm->printSolution();
 	delete geneticAlgorithm;
 }
 
 // for quick testing
 void Menu::pr3DisplDefault()
 {
-	geneticAlgorithm = new GeneticAlgorithm(currentMatrix, 300, false, 0.1, 0.50, 50, 50);
+	geneticAlgorithm = new GeneticAlgorithm(currentMatrix, 200, true, 0.09, 0.50, 50, 50, 0.1, 1000);
 	start = getTime();
 	geneticAlgorithm->run();
 	end = getTime();
 	std::cout << "Time: " << 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart << "ms" << std::endl;
+	geneticAlgorithm->printSolution();
 	delete geneticAlgorithm;
 }
 
@@ -141,28 +143,7 @@ void Menu::filDispl()
 
 void Menu::test()
 {
-	std::ofstream save("results.txt");
-	double saveTimeSA;
 	
-	for (int i = 800; i <= 1000; i = i + 200)
-	{
-		saveTimeSA = 0;
-		std::cout << i << " \n";
-
-		for (int j = 0; j <= 100; j++)
-		{
-			std::cout << j;
-			simulatedAnnealing = new SimulatedAnnealing(currentMatrix);
-			currentMatrix.generateRandom(i);
-			start = getTime();
-			simulatedAnnealing->run();
-			end = getTime();
-			saveTimeSA += 1000 * (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
-			delete simulatedAnnealing;
-		}
-		save << "Dimension: " << i << "Time for Simulated Annealing: " << saveTimeSA / 100.0 << "ms\n";
-	}
-	save.close();
 }
 
 
@@ -194,6 +175,7 @@ void Menu::run()
 			break;
 		case 30:
 			pr3DisplDefault();
+			break;
 		case 113:
 			test();
 			break;
