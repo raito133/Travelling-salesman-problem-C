@@ -144,17 +144,6 @@ Individual Individual::mateOrderCrossover(Individual secondIndividual)
 		
 		x++;
 	}
-
-	/*std::cout << "i: " << i << "\tj: " << j << "\n";
-
-	for (const int x : chromosome)
-		std::cout << x << " ";
-	std::cout << std::endl;
-	for (const int x : secondIndividual.getChromosome())
-		std::cout << x << " ";
-	std::cout << std::endl;
-	for (const int x : newChromosome)
-		std::cout << x << " ";*/
 	return Individual(newChromosome);
 }
 
