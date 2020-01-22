@@ -18,11 +18,14 @@ class GeneticAlgorithm
 	int elitismPoolSize;
 	bool mutateTransposition;
 	int solution;
+	int maxGeneration;
 	std::vector<int> vertices;
 	int tournamentSize;
 public:
 	void run();
-	GeneticAlgorithm(ATSPMatrix newAtspMatrix, int populationSize, bool mutateTransposition, double mutationRate, double matingRatio, int stagnationMax, int tournamentSize);
+	void printSolution();
+	int getSolution();
+	GeneticAlgorithm(ATSPMatrix newAtspMatrix, int populationSize, bool mutateTransposition, double mutationRate, double matingRatio, int stagnationMax, int tournamentSize, double elitismRate, int maxGeneration);
 	~GeneticAlgorithm();
 };
 
