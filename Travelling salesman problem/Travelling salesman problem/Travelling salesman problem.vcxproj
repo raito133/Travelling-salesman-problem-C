@@ -154,6 +154,8 @@
   <ItemGroup>
     <ClInclude Include="ATSPMatrix.h" />
     <ClInclude Include="bnbSolver.h" />
+    <ClInclude Include="GeneticAlgorithm.h" />
+    <ClInclude Include="Individual.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="pch.h" />
@@ -162,6 +164,8 @@
   <ItemGroup>
     <ClCompile Include="ATSPMatrix.cpp" />
     <ClCompile Include="bnbSolver.cpp" />
+    <ClCompile Include="GeneticAlgorithm.cpp" />
+    <ClCompile Include="Individual.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="pch.cpp">
